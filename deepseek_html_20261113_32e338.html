@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STYLO · premium footwear</title>
+  <!-- Font Awesome 6 (free) for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: #faf7f4;
+      color: #1e1e1e;
+      line-height: 1.5;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #e9e0d8;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #b8a28b;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #9c8570;
+    }
+
+    /* ---------- NAVBAR ---------- */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 5%;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      border-bottom: 1px solid rgba(184, 162, 139, 0.15);
+      transition: all 0.3s ease;
+    }
+
+    .logo {
+      font-size: 1.9rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #3e2e22, #b8a28b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      cursor: default;
+    }
+    .logo span {
+      font-weight: 300;
+      background: none;
+      -webkit-text-fill-color: #1e1e1e;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.4rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #2a2a2a;
+      font-weight: 500;
+      font-size: 1rem;
+      letter-spacing: 0.3px;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: #b8a28b;
+      transition: width 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      color: #b8a28b;
+    }
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-icons {
+      display: flex;
+      gap: 1.5rem;
+      font-size: 1.2rem;
+      color: #2a2a2a;
+    }
+    .nav-icons i {
+      cursor: pointer;
+      transition: color 0.2s, transform 0.2s;
+    }
+    .nav-icons i:hover {
+      color: #b8a28b;
+      transform: translateY(-2px);
+    }
+
+    /* ---------- HERO ---------- */
+    .hero {
+      padding: 4rem 5% 2rem;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 3.2rem;
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      color: #2a221c;
+    }
+    .hero h1 strong {
+      font-weight: 700;
+      background: linear-gradient(145deg, #4d3a2b, #b8a28b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      color: #6b5b4e;
+      max-width: 650px;
+      margin: 1rem auto 0;
+      font-size: 1.1rem;
+      font-weight: 300;
+    }
+
+    /* ---------- CATEGORY SECTION ---------- */
+    .categories {
+      padding: 2rem 5% 4rem;
+    }
+
+    .category-block {
+      margin-bottom: 4.5rem;
+    }
+
+    .category-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-bottom: 1.5px solid rgba(184, 162, 139, 0.3);
+      padding-bottom: 0.75rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .category-header h2 {
+      font-size: 1.9rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      color: #2f261f;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .category-header h2 i {
+      color: #b8a28b;
+      font-size: 1.6rem;
+    }
+    .category-header span {
+      font-size: 0.9rem;
+      color: #9c8570;
+      font-weight: 400;
+      letter-spacing: 0.5px;
+    }
+
+    /* product grid */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 2rem 1.5rem;
+    }
+
+    .product-card {
+      background: #ffffff;
+      border-radius: 20px;
+      overflow: hidden;
+      transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.35s;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.02);
+      border: 1px solid rgba(184, 162, 139, 0.1);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 22px 35px -12px rgba(74, 58, 44, 0.2);
+      border-color: rgba(184, 162, 139, 0.35);
+    }
+
+    .product-image {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background: #f2ece6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      transition: background 0.3s;
+      position: relative;
+    }
+    .product-card:hover .product-image {
+      background: #f8f2ec;
+    }
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform 0.3s ease;
+      filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.06));
+    }
+    .product-card:hover .product-image img {
+      transform: scale(1.04);
+    }
+
+    /* download button overlay */
+    .download-btn {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background: rgba(30, 30, 30, 0.85);
+      backdrop-filter: blur(6px);
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      padding: 0.4rem 0.9rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      z-index: 5;
+    }
+    .download-btn i {
+      font-size: 0.8rem;
+    }
+    .download-btn:hover {
+      background: #b8a28b;
+      transform: scale(1.02);
+      box-shadow: 0 6px 16px rgba(184, 162, 139, 0.4);
+    }
+
+    .product-info {
+      padding: 1.1rem 1rem 1.3rem;
+      background: white;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .product-info h4 {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #2f261f;
+      margin-bottom: 0.3rem;
+      letter-spacing: -0.2px;
+    }
+    .product-info .price {
+      font-weight: 400;
+      color: #b8a28b;
+      font-size: 1rem;
+      letter-spacing: 0.3px;
+      margin-bottom: 0.5rem;
+    }
+    .product-info .price i {
+      font-size: 0.8rem;
+      margin-right: 2px;
+      color: #cbb9a6;
+    }
+
+    .product-info .download-option {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #f2ece6;
+      color: #4d3a2b;
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 0.35rem 0.8rem;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      border: 1px solid rgba(184, 162, 139, 0.2);
+      align-self: flex-start;
+      margin-top: auto;
+    }
+    .product-info .download-option:hover {
+      background: #b8a28b;
+      color: #fff;
+      border-color: #b8a28b;
+    }
+
+    /* ---------- FOOTER ---------- */
+    .footer {
+      background: #221d18;
+      color: #e3d9d0;
+      padding: 4rem 5% 2.5rem;
+      margin-top: 3rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 3rem 2rem;
+      max-width: 1300px;
+      margin: 0 auto 3rem;
+    }
+
+    .footer-col h4 {
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      color: #ffffff;
+      letter-spacing: 0.3px;
+      position: relative;
+    }
+    .footer-col h4::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -8px;
+      width: 30px;
+      height: 1.5px;
+      background: #b8a28b;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+    .footer-col ul li {
+      margin-bottom: 0.85rem;
+    }
+    .footer-col ul a {
+      color: #b9aea4;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 300;
+      transition: color 0.2s, padding-left 0.2s;
+    }
+    .footer-col ul a:hover {
+      color: #ffffff;
+      padding-left: 5px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 1.2rem;
+      font-size: 1.4rem;
+      margin-top: 0.5rem;
+    }
+    .footer-social a {
+      color: #b9aea4;
+      transition: color 0.2s, transform 0.2s;
+      display: inline-block;
+    }
+    .footer-social a:hover {
+      color: #ffffff;
+      transform: translateY(-3px);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding-top: 2rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #8e8074;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .footer-bottom .copy i {
+      color: #b8a28b;
+      margin: 0 4px;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 800px) {
+      .navbar {
+        padding: 1rem 5%;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      .nav-links {
+        gap: 1.5rem;
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        padding-top: 0.5rem;
+        border-top: 1px solid rgba(184, 162, 139, 0.1);
+      }
+      .hero h1 {
+        font-size: 2.3rem;
+      }
+      .product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+        gap: 1rem;
+      }
+      .category-header h2 {
+        font-size: 1.5rem;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .nav-icons {
+        gap: 1rem;
+      }
+      .hero {
+        padding: 2.5rem 5% 1rem;
+      }
+      .hero p {
+        font-size: 0.95rem;
+      }
+      .product-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .product-info h4 {
+        font-size: 0.9rem;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+      .download-btn {
+        font-size: 0.65rem;
+        padding: 0.3rem 0.6rem;
+      }
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+    .product-image img[src=""] {
+      opacity: 0;
+    }
+
+    .category-header span i {
+      font-size: 0.8rem;
+      margin-left: 4px;
+      color: #b8a28b;
+    }
+
+    /* toast notification for download */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #2f261f;
+      color: #fff;
+      padding: 0.8rem 1.8rem;
+      border-radius: 60px;
+      font-size: 0.9rem;
+      font-weight: 400;
+      letter-spacing: 0.3px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      opacity: 0;
+      transition: opacity 0.3s, transform 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
+      z-index: 9999;
+      pointer-events: none;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(6px);
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    .toast i {
+      color: #b8a28b;
+      font-size: 1.1rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="logo">STYLO<span>.</span></div>
+    <ul class="nav-links">
+      <li><a href="#men">Men</a></li>
+      <li><a href="#women">Women</a></li>
+      <li><a href="#kids">Kids</a></li>
+      <li><a href="#">Sale</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+    <div class="nav-icons">
+      <i class="fas fa-search"></i>
+      <i class="far fa-heart"></i>
+      <i class="far fa-user"></i>
+      <i class="fas fa-shopping-bag"></i>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Step into <strong>elegance</strong>.</h1>
+    <p>Handcrafted footwear · timeless silhouettes · exceptional comfort.</p>
+  </section>
+
+  <!-- MAIN CATEGORIES: MEN / WOMEN / KIDS -->
+  <main class="categories">
+
+    <!-- ========== MEN ========== -->
+    <div class="category-block" id="men">
+      <div class="category-header">
+        <h2><i class="fas fa-mars"></i> Men</h2>
+        <span>14 styles <i class="fas fa-arrow-right"></i></span>
+      </div>
+      <div class="product-grid">
+        <!-- 1 -->
+        <div class="product-card">
+          <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400&q=80&auto=format&fit=crop" alt="Men sneaker">
+            <button class="download-btn" onclick="downloadProduct('Aero Street', event)"><i class="fas fa-download"></i> Download</button>
+          </div>
+          <div class="product-info">
+            <h4>Aero Street</h4>
+            <div class="price"><i class="fas fa-tag"></i> $189</div>
+            <span class="download-option" onclick="downloadProduct('Aero Street', event)"><i class="fas fa-cloud-download-alt"></i> Download image</span>
+          </div>
+        </div>
+        <!-- 2 -->
+        <div class="product-card">
+          <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1600269452121-4f2416e55c28?w=400&q=80&auto=format&fit=crop" alt="Men sneaker">
+            <button class="download-btn" onclick="downloadProduct('Cloud Runner', event)"><i class="fas fa-download"></i> Download</button>
+          </div>
+          <div class="product-info">
+            <h4>Cloud Runner</h4>
+            <div class="price"><i class="fas fa-tag"></i> $210</div>
+            <span class="download-option" onclick="downloadProduct('Cloud Runner', event)"><i class="fas fa-cloud-download-alt"></i> Download image</span>
+          </div>
+        </div>
+        <!-- 3 -->
+        <div class="product-card">
+          <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=400&q=80&auto=format&fit=crop" alt="Men sneaker">
+            <button class="download-btn" onclick="downloadProduct('Vintage Court', event)"><i class="fas fa-download"></i> Download</button>
+          </div>
+          <div class="product-info">
+            <h4>Vintage Court</h4>
+            <div class="price"><i class="fas fa-tag"></i> $165</div>
+            <span class="download-option" onclick="downloadProduct('Vintage Court', event)"><i class="fas fa-cloud-download-alt"></i> Download image</span>
+          </div>
+        </div>
+        <!-- 4 -->
+        <div class="product-card">
+          <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1614252369475-531eba835eb1?w=400&q=80&auto=format&fit=crop" alt="Men oxford">
+            <button class="download-btn" onclick="downloadProduct('Windsor Oxford', event)"><i class="fas fa-download"></i> Download</button>
+          </div>
+          <div class="product-info">
+            <h4>Windsor Oxford</h4>
+            <div class="price"><i class="fas fa-tag"></i> $320</div>
+            <span class="download-option" onclick="downloadProduct('Windsor Oxford', event)"><i class="fas fa-cloud-download-alt"></i> Download image</span>
+          </div>
+        </div>
+        <!-- 5 -->
+        <div class="product-card">
+          <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1533867617858-e7b97e060509?w=400&q=80&auto=format&fit=crop" alt="Men derby">
+            <button class="download-btn" onclick="downloadProduct('Savile Derby', event)"><i class="fas fa-download"></i> Download</button>
+          </div>
+          <div class="product-info">
+            <h4>Savile Derby</h4>
+            <div class="price"><i class="fas fa-tag"></i> $295</div>
+            <span class="download-option" onclick="downloadProduct('Savile Derby', event)"><i class="fas fa-cloud-download-alt"></i> Download image</span>
+          </div>
+        </div>
+        <!-- 6 -->
+        <div class="product-card">
+          <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1605812860427-4024433a70fd?w=400&q=80&auto=format&fit=crop" alt="Men boot">
+            <button class="download-btn" onclick="downloadProduct('Alpine Chelsea', event)"><i class="fas fa-download"></i> Download</button>
+          </div>
+          <div class="product-info">
+            <h4>Alpine Chelsea</h4>
+            <div class="price"><i class="fas fa-tag"></i> $280</div>
+            <span class="download-option" onclick="downloadProduct('Alpine Chelsea', event)"><i class="fas fa-cloud-download-alt"></i> Download image</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== WOMEN ========== -->
+    <div class="category-block" id="women">
+      <div class="category-header">
+        <h2><i class="fas fa-venus"></i> Women</h2>
+        <span>12 styles <i class="fas fa-arrow-right"></i></span>
+      </div>
+      <div class="product-grid">
+        <!-- 1 -->
+        <div class="product-card">
+          <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=400&q=80&auto=format&fit=crop" alt="Women heel">
+            <button class="download-btn" onclick="downloadProduct('Elegance Pump', event)"><i class="fas fa-download"></i> Download</button>
+          </div>
+          <div class="product-info">
+            <h4>Elegance Pump</h4>
+            <div class="price"><i class="fas fa-tag"></i> $310</div>
+            <span class="download-option" onclick="downloadProduct('Elegance Pump', event)"><i class="fas fa-cloud-download-alt"></i> Download image</span>
+          </div>
+        </div>
+        <!-- 2 -->
+        <div class="product-card">
+          <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1596703263926-eb0762ee17e4?w=400&q=80&auto=format&fit=crop" alt="Women loafer">
+            <button class="download-btn" onclick="downloadProduct('Monk Strap', event)"><i class="fas fa-download"></i> Download</button>
+          </div>
+          <div class="product-info">
+            <h4>Monk Strap</h4>
+            <div class="price"><i class="fas fa-tag"></i> $340</div>
+            <span class="download-option" onclick="downloadProduct('Monk Strap', event)"><i class="fas fa-cloud-download-alt"></i> Download image</span>
+          </div>
+        </div>
+        <!-- 3 -->
+        <div class="product-card">
+          <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1603487742131-4160ec999306?w=400&q=80&auto=format&fit=crop" alt="Women sandal">
+            <button class="download-btn" onclick="downloadProduct('Breeze Slide', event)"><i class="fas fa-download"></i> Download</button>
+          </div>
+          <div class="product-info">
+            <h4>Breeze Slide</h4>
+            <div class="price"><i class="fas fa-tag"></i> $120</div>
+            <span class="download-option" onclick="downloadProduct('Breeze Slide', event)"><i class="fas fa-cloud-download-alt"></i> Download image</span>
+          </div>
+        </div>
+        <!-- 4 -->
+        <div class="product-card">
+          <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1562273138-f46be4ebdf33?w=400&q=80&auto=format&fit=crop" alt="Women sandal">
+            <button class="download-btn" onclick="downloadProduct('Leather Thong', event)"><i class="fas fa-download"></i> Download</button>
+          </div>
+          <div class="product-info">
+            <h4>Leather Thong</h4>
+            <div class="price"><i class="fas fa-tag"></i> $145</div>
+            <span class="download-option" onclick="downloadProduct('Leather Thong', event)"><i class="fas fa-cloud-download-alt"></i> Download image</span>
+          </div>
+        </div>
+        <!-- 5 -->
+        <div class="product-card">
+          <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1605733513597-a8f8341084e6?w=400&q=80&auto=format&fit=crop" alt="Women slide">
+            <button class="download-btn" onclick="downloadProduct('Comfort Slide', event)"><i class="fas fa-download"></i> Download</button>
+          </div>
+          <div class="product-info">
+            <h4>Comfort Slide</h4>
+            <div class="price"><i class="fas fa-tag"></i> $99</div>
+            <span class="download-option" onclick="downloadProduct('Comfort Slide', event)"><i class="fas fa-cloud-download-alt"></i> Download image</span>
+          </div>
+        </div>
+        <!-- 6 -->
+        <div class="product-card">
+          <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1552346154-21d32810aba3?w=400&q=80&auto=format&fit=crop" alt="Women sneaker">
+            <button class="download-btn" onclick="downloadProduct('Prime Knit', event)"><i class="fas fa-download"></i> Download</button>
+          </div>
+          <div class="product-info">
+            <h4>Prime Knit</h4>
+            <div class="price"><i class="fas fa-tag"></i> $240</div>
+            <span class="download-option" onclick="downloadProduct('Prime Knit', event)"><i class="fas fa-cloud-download-alt"></i> Download image</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== KIDS ========== -->
+    <div class="category-block" id="kids">
+      <div class="category-header">
+        <h2><i class="fas fa-child"></i> Kids</h2>
+        <span>10 styles <i class="fas fa-arrow-right"></i></span>
+      </div>
+      <div class="product-grid">
+        <!-- 1 -->
+        <div class="product-card">
+          <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=400&q=80&auto=format&fit=crop" alt="Kids sneaker">
+            <button class="download-btn" onclick="downloadProduct('Retro Glide Kids', event)"><i class="fas fa-download"></i> Download</button>
+          </div>
+          <div class="product-info">
+            <h4>Retro Glide Kids</h4>
+            <div class="price"><i class="fas fa-tag"></i> $120</div>
+            <span class="download-option" onclick="downloadProduct('Retro Glide Kids', event)"><i class="fas fa-cloud-download-alt"></i> Download image</span>
+          </div>
+        </div>
+        <!-- 2 -->
+        <div class="product-card">
+          <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=400&q=80&auto=format&fit=crop" alt="Kids sneaker">
+            <button class="download-btn" onclick="downloadProduct('Urban Flex Kids', event)"><i class="fas fa-download"></i> Download</button>
+          </div>
+          <div class="product-info">
+            <h4>Urban Flex Kids</h4>
+            <div class="price"><i class="fas fa-tag"></i> $105</div>
+            <span class="download-option" onclick="downloadProduct('Urban Flex Kids', event)"><i class="fas fa-cloud-download-alt"></i> Download image</span>
+          </div>
+        </div>
+        <!-- 3 -->
+        <div class="product-card">
+          <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1520639888713-7851133b1ed0?w=400&q=80&auto=format&fit=crop" alt="Kids boot">
+            <button class="download-btn" onclick="downloadProduct('Rugged Lace Kids', event)"><i class="fas fa-download"></i> Download</button>
+          </div>
+          <div class="product-info">
+            <h4>Rugged Lace Kids</h4>
+            <div class="price"><i class="fas fa-tag"></i> $135</div>
+            <span class="download-option" onclick="downloadProduct('Rugged Lace Kids', event)"><i class="fas fa-cloud-download-alt"></i> Download image</span>
+          </div>
+        </div>
+        <!-- 4 -->
+        <div class="product-card">
+          <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1542286985-1c4d0c1f1c2b?w=400&q=80&auto=format&fit=crop" alt="Kids boot">
+            <button class="download-btn" onclick="downloadProduct('Trail Master Kids', event)"><i class="fas fa-download"></i> Download</button>
+          </div>
+          <div class="product-info">
+            <h4>Trail Master Kids</h4>
+            <div class="price"><i class="fas fa-tag"></i> $149</div>
+            <span class="download-option" onclick="downloadProduct('Trail Master Kids', event)"><i class="fas fa-cloud-download-alt"></i> Download image</span>
+          </div>
+        </div>
+        <!-- 5 -->
+        <div class="product-card">
+          <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1608256246200-53e635b5b65f?w=400&q=80&auto=format&fit=crop" alt="Kids loafer">
+            <button class="download-btn" onclick="downloadProduct('Milano Loafer Kids', event)"><i class="fas fa-download"></i> Download</button>
+          </div>
+          <div class="product-info">
+            <h4>Milano Loafer Kids</h4>
+            <div class="price"><i class="fas fa-tag"></i> $125</div>
+            <span class="download-option" onclick="downloadProduct('Milano Loafer Kids', event)"><i class="fas fa-cloud-download-alt"></i> Download image</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Stylo</h4>
+        <ul>
+          <li><a href="#">About us</a></li>
+          <li><a href="#">Craftsmanship</a></li>
+          <li><a href="#">Sustainability</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="#men">Men</a></li>
+          <li><a href="#women">Women</a></li>
+          <li><a href="#kids">Kids</a></li>
+          <li><a href="#">Accessories</a></li>
+          <li><a href="#">Gift cards</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Shipping</a></li>
+          <li><a href="#">Returns</a></li>
+          <li><a href="#">Size guide</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Follow</h4>
+        <div class="footer-social">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-pinterest"></i></a>
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-x-twitter"></i></a>
+        </div>
+        <p style="margin-top: 1.2rem; font-size: 0.85rem; color: #9c8e82; font-weight: 300;">
+          Join our newsletter — 10% off first order.
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="copy">
+        <i class="far fa-copyright"></i> 2025 Stylo — crafted with <i class="fas fa-heart" style="color: #b8a28b;"></i>
+      </div>
+      <div>
+        <a href="#" style="color: #8e8074; text-decoration: none; font-size: 0.85rem;">Privacy</a> · 
+        <a href="#" style="color: #8e8074; text-decoration: none; font-size: 0.85rem;">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast notification -->
+  <div class="toast" id="toast">
+    <i class="fas fa-check-circle"></i>
+    <span id="toastMessage">Downloading image...</span>
+  </div>
+
+  <script>
+    // Download functionality
+    function downloadProduct(productName, event) {
+      // Prevent event bubbling (so card click doesn't trigger)
+      if (event) event.stopPropagation();
+
+      // Show toast
+      const toast = document.getElementById('toast');
+      const toastMessage = document.getElementById('toastMessage');
+      toastMessage.textContent = `Downloading "${productName}" image...`;
+      toast.classList.add('show');
+
+      // Hide toast after 2.5 seconds
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2500);
+
+      // Find the image within the same product-card
+      const card = (event ? event.target.closest('.product-card') : null);
+      if (!card) return;
+
+      const img = card.querySelector('.product-image img');
+      if (!img || !img.src) return;
+
+      // Create a temporary link and trigger download
+      const link = document.createElement('a');
+      link.href = img.src;
+      // Extract filename from URL or use product name
+      let filename = productName.replace(/\s+/g, '-').toLowerCase();
+      const urlParts = img.src.split('?')[0].split('/');
+      const lastPart = urlParts[urlParts.length - 1];
+      if (lastPart && lastPart.includes('.')) {
+        filename = lastPart;
+      } else {
+        filename = filename + '.jpg';
+      }
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  </script>
+</body>
+</html>
